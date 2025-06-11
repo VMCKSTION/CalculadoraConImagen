@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculadora Avanzada SD</title>
+  <style>
+    body {
+      font-family: 'Bookshelf', sans-serif;
+      background-image: url('https://i.postimg.cc/CKfrR73n/photo-5066864604214308775-y.jpg');
+      background-color: #dac1cde7;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 60px;
+    }
+
+    .calculadora {
+      background-color: #dd5784;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      width: 300px;
+      text-align: center;
+    }
+
+    input, select, button {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #b85888;
+    }
+
+    button {
+      background-color: #e3e7eb;
+      color: rgb(179, 74, 74);
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #072046;
+    }
+
+    #resultado {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #333;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="calculadora">
+    <img src="https://i.postimg.cc/4NZPJs4c/ssp.jpg" alt="Imagen de Calculadora" width="200">
+    <h2>Calculadora Avanzada "SD"</h2>
+    <img src="https://i.postimg.cc/SNhn3KSB/photo-5066864604214308781-y.jpg" alt="Imagen de Calculadora" width="150">
+    <input type="number" id="num1" placeholder="Primer número">
+    <input type="number" id="num2" placeholder="Segundo número (si aplica)">
+
+    <select id="operacion">
+      <option value="sumar">Sumar</option>
+      <option value="restar">Restar</option>
+      <option value="multiplicar">Multiplicar</option>
+      <option value="dividir">Dividir</option>
+      <option value="potencia">Potencia</option>
+      <option value="raiz">Raíz cuadrada (solo num1)</option>
+      <option value="modulo">Módulo</option>
+    </select>
+
+    <button onclick="calcular()">Calcular</button>
+
+    <div id="resultado"></div>
+  </div>
+
+  <script>
+    function calcular() {
+      const n1 = parseFloat(document.getElementById("num1").value);
+      const n2 = parseFloat(document.getElementById("num2").value);
+      const op = document.getElementById("operacion").value;
+      let resultado;
+
+      if (isNaN(n1)) {
+        document.getElementById("resultado").textContent = "Ingresa al menos el primer número";
+        return;
+      }
+
+      switch(op) {
+        case "sumar":
+          resultado = n1 + n2;
+          break;
+        case "restar":
+          resultado = n1 - n2;
+          break;
+        case "multiplicar":
+          resultado = n1 * n2;
+          break;
+        case "dividir":
+          resultado = n2 !== 0 ? n1 / n2 : "Error: No se puede dividir entre 0";
+          break;
+        case "potencia":
+          resultado = Math.pow(n1, n2);
+          break;
+        case "raiz":
+          resultado = n1 >= 0 ? Math.sqrt(n1) : "Error: No se puede sacar raíz de un número negativo";
+          break;
+        case "modulo":
+          resultado = n2 !== 0 ? n1 % n2 : "Error: División por 0 no permitida";
+          break;
+        default:
+          resultado = "Operación no válida";
+      }
+
+      document.getElementById("resultado").textContent = "Resultado: " + resultado;
+    }
+  </script>
+
+</body>
+</html>
